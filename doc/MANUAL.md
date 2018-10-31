@@ -81,7 +81,7 @@ In the web UI, there are three rows of panels with cryptic looking names and edi
 
   * `Inverse Top` - Same as `Inverse Join` but make our orders jump to the very top of the order book.
 
-  * `HamelinRat` - Follow the Colossus of the market. Unlike other modes, it does not calculate the quote spread based on fair value, instead it looks for the biggest order in the market levels and places the quote right before it.
+  * `HamelinRat` - Follow the Colossus of the market. Unlike other modes, it does not calculate the quote spread based on fair value, instead it looks for the biggest order in the market levels and places the quote right before it. If `widthPing` is set above 0, this will be the max `depth`.
 
   * `Depth` - Use `width` as `depth`. Unlike other modes, it does not calculate the quote spread based on fair value, instead it walks over all current open orders in the book and places the quote right after `depth` quantity, at both sides.
 

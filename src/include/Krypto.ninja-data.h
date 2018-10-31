@@ -2144,16 +2144,24 @@ namespace K {
         quoteAtTopOfMarket(levels, minTick, quotes);
         quotes.bid.size = 0;
         quotes.ask.size = 0;
-        for (const mLevel &it : levels.bids)
+        mAmount depth = 0;
+        for (const mLevel &it : levels.bids) {
           if (quotes.bid.size < it.size and it.price <= quotes.bid.price) {
             quotes.bid.size = it.size;
             quotes.bid.price = it.price;
           }
-        for (const mLevel &it : levels.asks)
+          depth += it.size;
+          if (depth > qp.widthPing) break;
+        }
+        depth=0;
+        for (const mLevel &it : levels.asks) {
           if (quotes.ask.size < it.size and it.price >= quotes.ask.price) {
             quotes.ask.size = it.size;
             quotes.ask.price = it.price;
           }
+          depth += it.size;
+          if (depth > qp.widthPing) break;
+        }
         if (quotes.bid.size) quotes.bid.price += minTick;
         if (quotes.ask.size) quotes.ask.price -= minTick;
         quotes.bid.size = bidSize;
